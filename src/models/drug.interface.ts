@@ -1,1 +1,6 @@
-// ./src/models/drug.interface.ts
+// /src/models/drug.interface.ts
+
+export interface IDrug {
+    uuid: number;
+    fdaApplicationNumber: string;
+}
