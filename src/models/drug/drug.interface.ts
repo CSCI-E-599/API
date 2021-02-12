@@ -1,8 +1,7 @@
 // /src/models/drug.interface.ts
 
-import { IPatent } from "./patent.interface";
-import { IExclusivity } from "./exclusivity.interface";
-
+import { IPatent } from './patent.interface';
+import { IExclusivity } from './exclusivity.interface';
 
 export interface IDrug {
     activeIngredient: string;
