@@ -1,9 +1,5 @@
 // /src/models/drug.interface.ts
-
-import { IPatent } from './patent.interface';
-import { IExclusivity } from './exclusivity.interface';
-
-export interface IDrug {
+export interface IOrangeBookDrug {
     activeIngredient: string;
     proprietaryName: string;
     dosageFormRouteOfAdministration: string;
@@ -16,6 +12,19 @@ export interface IDrug {
     approvalDate: Date;
     applicantHolderFullName: string;
     marketingStatus: string;
-    patents: IPatent[];
-    exclusivities: IExclusivity[];
+    patents: {
+        productNumber: number;
+        patentNumber: number;
+        patentExpiration: any;
+        drugSubstance?: string;
+        drugProduct?: string;
+        patentUseCode?: string;
+        delistRequested?: boolean;
+        submissionDate: Date;
+    }[];
+    exclusivities: {
+        productNumber: number;
+        exclusivityCode: string;
+        exclusivityExpiration: Date;
+    }[];
 }

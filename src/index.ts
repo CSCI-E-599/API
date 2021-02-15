@@ -1,50 +1,39 @@
 /* eslint-disable no-unused-vars */
-/**
- * Required External Modules
- */
 import * as dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-
 import { logger } from './utilities/logger.utility';
 
+/** import routers */
 import { drugsRouter } from './routes/drugs.router';
 
+/** load environment variables */
 dotenv.config();
 
-/**
- * App Variables
- */
+// if there is no port env var, then exit the server
 if (!process.env.PORT) {
   process.exit(1);
 }
 
 const PORT: number = parseInt(process.env.PORT as string, 10);
 
+/** load express app and middleware libs */
 const app = express();
-
-/**
- *  App Configuration
- */
-
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
+/** load routers */
 app.use('/drugs', drugsRouter);
+// app.use('/patents', patentsRouter);
 
-/**
- * Server Activation
- */
-
+/** start HTTP server */
 const server = app.listen(PORT, () => {
   logger.info(`Listening on port ${PORT}`);
 });
 
-/**
- * Webpack HMR Activation
- */
+/** activate Webpack HMR reload for live reload during dev */
 type ModuleId = string | number;
 
 interface WebpackHotModule {

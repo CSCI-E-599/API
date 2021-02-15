@@ -1,4 +1,5 @@
 // ./src/services/drugs.service.ts
+import { singleton } from 'tsyringe';
 import { IOrangeBookDrug } from '../models/OrangeBookDrug.interface';
 import { Drug } from '../models/Drug.model';
 // import * as PatentService from './patents.service';
@@ -63,21 +64,18 @@ const testDrugs: IOrangeBookDrug[] = [
   },
 ];
 
-/**
- * findAll
- */
-// export const findAll = async (): Promise<IDrug[]> => testDrugs;
+@singleton()
+export class OrangeBookService {
+  public findAll = async (): Promise<Drug[]> => {
+    const drugs: Drug[] = [];
 
-export const findAll = async (): Promise<Drug[]> => {
-  const drugs: Drug[] = [];
+    testDrugs.forEach((orangeBookEntry: IOrangeBookDrug) => {
+      drugs.push(new Drug(orangeBookEntry, 'nothing'));
+    });
 
-  testDrugs.forEach((orangeBookEntry: IOrangeBookDrug) => {
-    drugs.push(new Drug(orangeBookEntry, 'nothing'));
-  });
+    return drugs;
+  };
 
-  return drugs;
-};
-
-/**
- * findOneByFDAApplicationNumber
- */
+  // eslint-disable-next-line max-len
+  public getByApplicationID = async (): Promise<IOrangeBookDrug> => Promise.resolve(testDrugs[0]);
+}
