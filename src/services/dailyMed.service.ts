@@ -11,11 +11,16 @@ interface DailyMedSPLMetadata {
   setid: string;
 }
 
+export interface DailyMedSplLabel {
+  splSetId: string;
+  splDocument: string;
+}
+
 @singleton()
 export class DailyMedService {
-  getSplBySetId = async (setID: string): Promise<any> => {
-    const result = await axios.get(`https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/${setID}.xml`);
-    return result;
+  getSplBySetId = async (splSetId: string): Promise<DailyMedSplLabel> => {
+    const splDocument = (await axios.get(`https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/${splSetId}.xml`)) as string;
+    return { splSetId, splDocument: 'placeholder' };
   }
 
   getSplIdsByFdaApplicationID = async (fdaApplicationId: string): Promise<DailyMedSPLMetadata> => {

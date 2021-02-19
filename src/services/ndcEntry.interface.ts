@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-export interface IndcEntry {
+export interface INDCEntry {
     product_ndc: string;
     generic_name: string;
     labeler_name: string;

@@ -71,9 +71,9 @@ const testDrugs: IOrangeBookDrug[] = [
 export const findAll = async (): Promise<Drug[]> => {
   const drugs: Drug[] = [];
 
-  testDrugs.forEach((orangeBookEntry: IOrangeBookDrug) => {
-    drugs.push(new Drug(orangeBookEntry, 'nothing'));
-  });
+  // testDrugs.forEach((orangeBookEntry: IOrangeBookDrug) => {
+  //   drugs.push(new Drug(orangeBookEntry, 'nothing'));
+  // });
 
   return drugs;
 };

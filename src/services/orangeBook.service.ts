@@ -69,9 +69,9 @@ export class OrangeBookService {
   public findAll = async (): Promise<Drug[]> => {
     const drugs: Drug[] = [];
 
-    testDrugs.forEach((orangeBookEntry: IOrangeBookDrug) => {
-      drugs.push(new Drug(orangeBookEntry, 'nothing'));
-    });
+    // testDrugs.forEach((orangeBookEntry: IOrangeBookDrug) => {
+    //   drugs.push(new Drug(orangeBookEntry, 'nothing'));
+    // });
 
     return drugs;
   };
