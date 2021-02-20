@@ -1,8 +1,7 @@
 // ./src/services/drugs.service.ts
 import { singleton } from 'tsyringe';
 import { IOrangeBookDrug } from '../models/OrangeBookDrug.interface';
-import { Drug } from '../models/Drug.model';
-// import * as PatentService from './patents.service';
+import { Drug } from '../models/Drug/Drug.model';
 
 const testDrugs: IOrangeBookDrug[] = [
   {

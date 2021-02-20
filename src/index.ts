@@ -26,7 +26,6 @@ app.use(express.json());
 
 /** load routers */
 app.use('/drugs', drugsRouter);
-// app.use('/patents', patentsRouter);
 
 /** start HTTP server */
 const server = app.listen(PORT, () => {
