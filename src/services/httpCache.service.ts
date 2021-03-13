@@ -8,28 +8,19 @@ export class HTTPCacheService {
     reallyTerribleCache: {[key: string]: string;} = {};
 
     public get = async (url: string): Promise<any> => {
-      // let responseDataBody: any;
-      // const hashDigest = Base64.stringify(sha256(url));
+      const hashDigest = Base64.stringify(sha256(url));
 
-      // if (this.reallyTerribleCache[hashDigest]) {
-      //   console.log('Response retrieved from cache');
-      //   return JSON.parse(this.reallyTerribleCache[hashDigest]);
-      // }
+      if (this.reallyTerribleCache[hashDigest]) {
+        console.log(`Response retrieved from cache: ${hashDigest}`);
+        return JSON.parse(this.reallyTerribleCache[hashDigest]);
+      }
 
-      // // check cache for result
-      // // if it exists then returned the cached body
-      // responseDataBody = 'sdfds';
-      // if not then make the req
+      console.log('Failed to find response in cache. Making HTTP request...');
       const response = await axios.get(url);
       const responseDataBody = response.data.results;
-      // store in cache for next time
-      const hashDigest = Base64.stringify(sha256(url));
-      const stringifiedBody = JSON.stringify(responseDataBody);
+      console.log(`Storing HTTP response in cache: ${hashDigest}`);
+      this.reallyTerribleCache[hashDigest] = JSON.stringify(responseDataBody);
 
-      // this.reallyTerribleCache[hashDigest] = { hashDigest: stringifiedBody };
-
-      // console.log(hashDigest);
-      // console.log(stringifiedBody);
       return responseDataBody;
     };
 }
