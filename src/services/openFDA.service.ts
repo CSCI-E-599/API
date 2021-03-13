@@ -15,17 +15,25 @@ export class OpenFDAService {
     this.httpCacheService = httpCacheService;
   }
 
+  /**
+   * 
+   * @param applicationID 
+   * @returns 
+   */
   public getDrugByApplicationID = async (applicationID: string): Promise<OpenFDADrug> => {
     const results = await this.httpCacheService.get(`https://api.fda.gov/drug/drugsfda.json?search=application_number:${applicationID}&limit=1000`);
     return results[0];
   }
 
+  /**
+   * 
+   * @param applicationID 
+   * @returns 
+   */
   public getLabelsByApplicationID = async (applicationID: string): Promise<any> => {
     const results = await this.httpCacheService.get(`https://api.fda.gov/drug/label.json?search=openfda.application_number:${applicationID}`);
     return results;
   }
-
-
 
   /**
    * Public search function which acts as the entry point for most services provided by the NDC
@@ -44,14 +52,11 @@ export class OpenFDAService {
       case 'generic_name': {
         return this.searchByNonProprietaryName(query);
       }
-      case 'product_ndc': {
-        return this.searchByNDCCode(query);
-      }
       case 'manufacturer_name': {
-        return this.searchByNDCCode(query);
+        return this.searchByManufacturer(query);
       }
       default: {
-        throw new Error(`Invalid search type. Search type must be "brand_name", "application_number", "generic_name", "ndc", or "manufacturer"`);
+        throw new Error('Invalid search type. Search type must be "brand_name", "application_number", "generic_name", or "manufacturer"');
       }
     }
   }
@@ -78,18 +83,11 @@ export class OpenFDAService {
   private searchByNonProprietaryName = async (nonProprietaryName: string): Promise<OpenFDADrug[]> => this.makeSearchRequest('generic_name', nonProprietaryName, 100);
 
   /**
-   * Find drugs in the National Drug Code Directory based on the drugs NDC code.
-   * Returns up to 100 results in an array or an empty array of no results are found.
-   * @param NDCCode string: the NDC code of the the drug
-   */
-  private searchByNDCCode = async (NDCCode: string): Promise<OpenFDADrug[]> => this.makeSearchRequest('product_ndc', NDCCode, 100);
-
-  /**
    * Find drugs in the National Drug Code Directory based on the drugs labler (manufacturer).
    * Returns up to 100 results in an array or an empty array of no results are found.
    * @param labeler string: the name of the drugs labeler (manufacturer)
    */
-  private searchByLabeler = async (labeler: string): Promise<OpenFDADrug[]> => this.makeSearchRequest('openfda.manufacturer_name', labeler, 100);
+  private searchByManufacturer = async (labeler: string): Promise<OpenFDADrug[]> => this.makeSearchRequest('openfda.manufacturer_name', labeler, 100);
 
   /**
    * Dynamic search function to make an API call to the National Drug Code database and search for
@@ -100,7 +98,20 @@ export class OpenFDAService {
    */
   private makeSearchRequest = async (p: string, v: string, l: number): Promise<OpenFDADrug[]> => {
     const resultsArray: OpenFDADrug[] = [];
-    const results = await this.httpCacheService.get(`${this.searchBaseUrl}${p}:${v}&limit=${l.toString()}`);
+    let results = [];
+
+    // try to make search query to the OpenFDA API, if there are no results return an empty array
+    try {
+      results = await this.httpCacheService.get(`${this.searchBaseUrl}${p}:${v}&limit=${l.toString()}`);
+    } catch (err) {
+      if (err.response.status === 404) {
+        return resultsArray;
+      }
+
+      throw new Error(err);
+    }
+
+    // only respond with the data we need by mapping only specific params as our OpenFDADrug model
     results.forEach((result: OpenFDADrug) => {
       resultsArray.push({
         application_number: result.application_number,
@@ -108,6 +119,7 @@ export class OpenFDAService {
         products: result.products,
       });
     });
+
     return resultsArray;
   }
 }

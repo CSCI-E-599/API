@@ -3,7 +3,7 @@ export interface OpenFDADrug {
     submissions?: any[];
     application_number: string;
     sponser_name?: string;
-    openfda?: {
+    openfda: {
         brand_name: string[];
         generic_name: string[];
         manufacturer_name: string[];
