@@ -99,8 +99,15 @@ export class OpenFDAService {
    * @param l nnumber: the upper limit of the number of possible results returned for the query
    */
   private makeSearchRequest = async (p: string, v: string, l: number): Promise<OpenFDADrug[]> => {
+    const resultsArray: OpenFDADrug[] = [];
     const results = await this.httpCacheService.get(`${this.searchBaseUrl}${p}:${v}&limit=${l.toString()}`);
-    console.log(results);
-    return results;
+    results.forEach((result: OpenFDADrug) => {
+      resultsArray.push({
+        application_number: result.application_number,
+        openfda: result.openfda,
+        products: result.products,
+      });
+    });
+    return resultsArray;
   }
 }

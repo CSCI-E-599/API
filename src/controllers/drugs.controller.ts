@@ -4,14 +4,24 @@ import 'reflect-metadata';
 import { singleton } from 'tsyringe';
 import { Drug } from '../models/Drug/Drug.model';
 import { DrugDirector } from '../models/Drug/DrugDirector';
+import { OpenFDAService } from '../services/openFDA.service';
+import { OpenFDADrug } from '../services/OpenFDADrug.interface';
 @singleton()
 export class DrugsController {
     private drugDirector: DrugDirector;
+    private openFDAService: OpenFDAService;
 
     constructor(
       drugDirector: DrugDirector,
+      openFDAService: OpenFDAService,
     ) {
       this.drugDirector = drugDirector;
+      this.openFDAService = openFDAService;
+    }
+
+    public findDrug = async (searchQuery: string, searchType: string): Promise<OpenFDADrug[]> => {
+      const results = await this.openFDAService.search(searchQuery, searchType);
+      return results;
     }
 
     /**

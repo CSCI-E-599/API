@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
 export interface OpenFDADrug {
-    submissions: any[];
+    submissions?: any[];
     application_number: string;
-    sponser_name: string;
-    openfda: {
+    sponser_name?: string;
+    openfda?: {
         brand_name: string[];
         generic_name: string[];
         manufacturer_name: string[];
@@ -15,7 +15,7 @@ export interface OpenFDADrug {
         spl_set_id: string[];
         package_ndc: string[];
     };
-    products: {
+    products?: {
         product_number: string;
         reference_drug: string;
         brand_name: string;

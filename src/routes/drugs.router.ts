@@ -7,6 +7,23 @@ import { DrugsController } from '../controllers/drugs.controller';
 export const drugsRouter = express.Router();
 const drugsController = container.resolve(DrugsController);
 
+drugsRouter.get('/', async (req: Request, res: Response) => {
+  const { searchQuery } = req.query;
+  const { searchType } = req.query;
+
+  if (!searchQuery || !searchType) {
+    res.status(400).send('Missing parameter searchQuery or searchType');
+  }
+
+  try {
+    const drugs = await drugsController.findDrug(searchQuery as string, searchType as string);
+    res.status(200).send(drugs);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+});
+
+
 /**
  * GET drugs/:applicationNumber
  * Route for getting a Drug by FDA Application Number (eg NDA022063, or N022063)
