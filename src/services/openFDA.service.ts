@@ -55,6 +55,9 @@ export class OpenFDAService {
       case 'manufacturer_name': {
         return this.searchByManufacturer(query);
       }
+      case 'active_ingredients': {
+        return this.searchByActiveIngredient(query);
+      }
       default: {
         throw new Error('Invalid search type. Search type must be "brand_name", "application_number", "generic_name", or "manufacturer"');
       }
@@ -66,28 +69,35 @@ export class OpenFDAService {
    * Returns up to 100 results in an array or an empty array of no results are found.
    * @param proprietaryName string: the proprietary name (brand name) of the drug
    */
-  private searchByProprietaryName = async (proprietaryName: string): Promise<OpenFDADrug[]> => this.makeSearchRequest('openfda.brand_name', proprietaryName, 100);
+  private searchByProprietaryName = async (proprietaryName: string): Promise<OpenFDADrug[]> => this.makeSearchRequest('openfda.brand_name', proprietaryName, 1000);
 
   /**
    * Find drugs in the National Drug Code Directory based on the drugs FDA Application number.
    * Returns up to 100 results in an array or an empty array of no results are found.
    * @param applicationNumber string: the FDA marketing application number of a drug
    */
-  private searchByApplicationNumber = async (applicationNumber: string): Promise<OpenFDADrug[]> => this.makeSearchRequest('application_number', applicationNumber, 100);
+  private searchByApplicationNumber = async (applicationNumber: string): Promise<OpenFDADrug[]> => this.makeSearchRequest('application_number', applicationNumber, 1000);
 
   /**
    * Find drugs in the National Drug Code Directory based on the drugs non-proprietary name.
    * Returns up to 100 results in an array or an empty array of no results are found.
    * @param nonProprietaryName string: the non-proprietary name (generic name) of the drug
    */
-  private searchByNonProprietaryName = async (nonProprietaryName: string): Promise<OpenFDADrug[]> => this.makeSearchRequest('generic_name', nonProprietaryName, 100);
+  private searchByNonProprietaryName = async (nonProprietaryName: string): Promise<OpenFDADrug[]> => this.makeSearchRequest('generic_name', nonProprietaryName, 1000);
 
   /**
    * Find drugs in the National Drug Code Directory based on the drugs labler (manufacturer).
    * Returns up to 100 results in an array or an empty array of no results are found.
    * @param labeler string: the name of the drugs labeler (manufacturer)
    */
-  private searchByManufacturer = async (labeler: string): Promise<OpenFDADrug[]> => this.makeSearchRequest('openfda.manufacturer_name', labeler, 100);
+  private searchByManufacturer = async (manufacturer: string): Promise<OpenFDADrug[]> => this.makeSearchRequest('openfda.manufacturer_name', manufacturer, 1000);
+
+  /**
+   * Find drugs in the National Drug Code Directory based on the drugs labler (manufacturer).
+   * Returns up to 100 results in an array or an empty array of no results are found.
+   * @param labeler string: the name of the drugs labeler (manufacturer)
+   */
+   private searchByActiveIngredient = async (activeIngredients: string): Promise<OpenFDADrug[]> => this.makeSearchRequest('products.active_ingredients', activeIngredients, 1000);
 
   /**
    * Dynamic search function to make an API call to the National Drug Code database and search for
