@@ -113,11 +113,15 @@ export class OpenFDAService {
 
     // only respond with the data we need by mapping only specific params as our OpenFDADrug model
     results.forEach((result: OpenFDADrug) => {
-      resultsArray.push({
-        application_number: result.application_number,
-        openfda: result.openfda,
-        products: result.products,
-      });
+      // only return results that have an application number and openFDA data, its useless otherwise
+      // the FDA API has, on occasion, returned partial results with missing OpenFDA data
+      if ((result.openfda !== undefined) && (result.application_number !== undefined)) {
+        resultsArray.push({
+          application_number: result.application_number,
+          openfda: result.openfda,
+          products: result.products,
+        });
+      }
     });
 
     return resultsArray;
