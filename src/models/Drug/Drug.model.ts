@@ -1,10 +1,12 @@
 import { OpenFDADrug } from '../../services/OpenFDADrug.interface';
 import { DrugPlan } from './DrugPlan.interface';
 import { DrugMetadata } from './DrugMetadata.interface';
+import { DrugSPLHistory } from './DrugSPLHisotry.interface';
 
 export class Drug implements DrugPlan {
     private applicationNumber: string| undefined;
     metadata: DrugMetadata | undefined;
+    drugSplHistory: DrugSPLHistory[] | undefined;
     spls: any;
 
     public setApplicationNumber(applicationNumber: string): void {
@@ -31,6 +33,10 @@ export class Drug implements DrugPlan {
         splSetId: metadata.openfda.spl_set_id,
         packageNdc: metadata.openfda.package_ndc,
       };
+    }
+
+    public setDrugSplHistories(splHistories: DrugSPLHistory[]) {
+      this.drugSplHistory = splHistories;
     }
 
     public setDrugSPLs(spls: any): void {

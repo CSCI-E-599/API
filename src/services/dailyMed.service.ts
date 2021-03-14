@@ -17,8 +17,14 @@ export interface DailyMedSplLabel {
 }
 
 export interface DailyMedSplLabelHistory {
-  spl_version: number;
-  published_date: string;
+  spl: {
+    title: string;
+    setid: string;
+  };
+  history: {
+    spl_version: number;
+    published_date: string;
+  }[];
 }
 
 @singleton()
@@ -28,9 +34,9 @@ export class DailyMedService {
     return { splSetId, splDocument: 'placeholder' };
   }
 
-  getSplHistory = async (splSetId: string): Promise<DailyMedSplLabelHistory[]> => {
+  getSplHistory = async (splSetId: string): Promise<DailyMedSplLabelHistory> => {
     const splHistory = (await axios.get(`https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/${splSetId}/history.json`));
-    return splHistory.data.data.history as DailyMedSplLabelHistory[];
+    return splHistory.data.data as DailyMedSplLabelHistory;
   }
 
   // getSplIdsByFdaApplicationID = async (fdaApplicationId: string): Promise<DailyMedSPLMetadata> => {

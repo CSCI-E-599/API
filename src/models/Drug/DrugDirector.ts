@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { singleton } from 'tsyringe';
 import { DrugBuilder } from './DrugBuilder';
 import { Drug } from './Drug.model';
@@ -16,10 +17,18 @@ export class DrugDirector {
       return this.drugBuilder.getDrug();
     }
 
-    public async buildDrugWithMetadataAndSPLS(applicationNumber: string): Promise<Drug> {
+    public async buildDrugWithMetadataAndHistoricalSPLMetadata(applicationNumber: string): Promise<Drug> {
       this.drugBuilder.setDrugApplicationNumber(applicationNumber);
       await this.drugBuilder.buildDrugMetadata();
-      await this.drugBuilder.buildDrugSPLs();
+      await this.drugBuilder.buildDrugSPLHistory();
       return this.drugBuilder.getDrug();
     }
+
+    // public async buildDrugWithMetadataAndSPLS(applicationNumber: string): Promise<Drug> {
+    //   this.drugBuilder.setDrugApplicationNumber(applicationNumber);
+    //   await this.drugBuilder.buildDrugMetadata();
+    //   await this.drugBuilder.buildDrugSPLs();
+    //   await this.drugBuilder.buildDrugSPLHistory();
+    //   return this.drugBuilder.getDrug();
+    // }
 }

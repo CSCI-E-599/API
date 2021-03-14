@@ -37,7 +37,7 @@ export class DrugsController {
      * @param applicationNumber
      */
     public getDrugByApplicationNumber = async (applicationNumber: string): Promise<Drug> => {
-      const drug = await this.drugDirector.buildDrugWithMetadataAndSPLS(applicationNumber);
+      const drug = await this.drugDirector.buildDrugWithMetadataAndHistoricalSPLMetadata(applicationNumber);
       return drug;
     };
 }
