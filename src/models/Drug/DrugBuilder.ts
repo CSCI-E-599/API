@@ -1,8 +1,9 @@
 /* eslint-disable max-len */
 import { container, singleton } from 'tsyringe';
 import { DrugBuilderInterface } from './DrugBuilder.interface';
-import { OpenFDAService } from '../../services/openFDA.service';
-import { DailyMedService, DailyMedSplLabelHistory } from '../../services/dailyMed.service';
+import { OpenFDAService } from '../../services/OpenFDA.service';
+import { DailyMedService, DailyMedSplLabelHistory } from '../../services/DailyMed.service';
+import { RxImageService } from '../../services/RxImage.service';
 import { Drug } from './Drug.model';
 import { DrugSPLHistory } from './DrugSPLHisotry.interface';
 
@@ -10,6 +11,7 @@ import { DrugSPLHistory } from './DrugSPLHisotry.interface';
 export class DrugBuilder implements DrugBuilderInterface {
     openFDAService = container.resolve(OpenFDAService);
     dailyMedService = container.resolve(DailyMedService);
+    RxImageService = container.resolve(RxImageService);
     drug: Drug = new Drug();
 
     constructor() {
@@ -36,10 +38,6 @@ export class DrugBuilder implements DrugBuilderInterface {
       const splHistoryRequests: Promise<DailyMedSplLabelHistory>[] = [];
       for (let x = 0; x < drugSPLSetIds?.length; x++) {
         splHistoryRequests.push(this.dailyMedService.getSplHistory(drugSPLSetIds[x]));
-        // drugSplHistories.push({
-        //   spl_set_id: splSetId,
-        //   history: splHistory,
-        // });
       }
 
       const histories = await Promise.all(splHistoryRequests);
@@ -51,17 +49,27 @@ export class DrugBuilder implements DrugBuilderInterface {
           history: history.history,
         });
       });
-      // console.log(histories);
-      // drugSPLSetIds?.forEach(async (splSetId: string) => {
-      //   const splHistory = await this.dailyMedService.getSplHistory(splSetId);
-      //   drugSplHistories.push({
-      //     spl_set_id: splSetId,
-      //     history: splHistory,
-      //   });
-      // });
 
       this.drug.setDrugSplHistories(drugSplHistories);
-      console.log(this.drug);
+    }
+
+    public async buildDrugImages() {
+      const drugSPLSetIds = this.drug.metadata!.splSetId;
+      const drugImages: string[] = [];
+
+      const drugImagesRequests: Promise<any>[] = [];
+      for (let x = 0; x < drugSPLSetIds?.length; x++) {
+        drugImagesRequests.push(this.RxImageService.getDrugImagesBySplSetId(drugSPLSetIds[x]));
+      }
+
+      const imageSets = await Promise.all(drugImagesRequests);
+      imageSets.forEach((imageMetadatas: any) => {
+        imageMetadatas.forEach((imageMetadata: any) => {
+          drugImages.push(imageMetadata.imageUrl);
+        });
+      });
+
+      this.drug.setDrugImages(drugImages);
     }
 
     public async buildDrugSPLs(): Promise<void> {

@@ -7,6 +7,7 @@ export class Drug implements DrugPlan {
     private applicationNumber: string| undefined;
     metadata: DrugMetadata | undefined;
     drugSplHistory: DrugSPLHistory[] | undefined;
+    drugImages: string[] | undefined;
     spls: any;
 
     public setApplicationNumber(applicationNumber: string): void {
@@ -37,6 +38,10 @@ export class Drug implements DrugPlan {
 
     public setDrugSplHistories(splHistories: DrugSPLHistory[]) {
       this.drugSplHistory = splHistories;
+    }
+
+    public setDrugImages(drugImages: string[]) {
+      this.drugImages = drugImages;
     }
 
     public setDrugSPLs(spls: any): void {

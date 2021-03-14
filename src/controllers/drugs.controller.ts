@@ -4,7 +4,7 @@ import 'reflect-metadata';
 import { singleton } from 'tsyringe';
 import { Drug } from '../models/Drug/Drug.model';
 import { DrugDirector } from '../models/Drug/DrugDirector';
-import { OpenFDAService } from '../services/openFDA.service';
+import { OpenFDAService } from '../services/OpenFDA.service';
 import { OpenFDADrug } from '../services/OpenFDADrug.interface';
 @singleton()
 export class DrugsController {
@@ -36,8 +36,10 @@ export class DrugsController {
      * TODO: Add a comment here
      * @param applicationNumber
      */
-    public getDrugByApplicationNumber = async (applicationNumber: string): Promise<Drug> => {
-      const drug = await this.drugDirector.buildDrugWithMetadataAndHistoricalSPLMetadata(applicationNumber);
+    public getDrugByApplicationNumber = async (applicationNumber: string, shouldGetSplHistory: boolean, shouldGetCurrentSplLabel: boolean, shouldGetDrugImages: boolean): Promise<Drug> => {
+      console.log(shouldGetCurrentSplLabel);
+      console.log(shouldGetSplHistory);
+      const drug = await this.drugDirector.buildExtensibleDrugWithMetadata(applicationNumber, shouldGetSplHistory, shouldGetCurrentSplLabel, shouldGetDrugImages);
       return drug;
     };
 }
