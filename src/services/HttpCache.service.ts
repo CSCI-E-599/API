@@ -4,7 +4,7 @@ import sha256 from 'crypto-js/sha256';
 import Base64 from 'crypto-js/enc-base64';
 
 @singleton()
-export class HTTPCacheService {
+export class HttpCacheService {
     reallyTerribleCache: {[key: string]: string;} = {};
 
     public get = async (url: string): Promise<any> => {

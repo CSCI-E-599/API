@@ -1,24 +1,24 @@
 // ./src/services/drugs.service.ts
 import { singleton } from 'tsyringe';
-import { HTTPCacheService } from './HttpCache.service';
+import { HttpCacheService } from './HttpCache.service';
 import { OpenFDADrug } from './OpenFDADrug.interface';
 
 @singleton()
 export class OpenFDAService {
-  private httpCacheService: HTTPCacheService;
+  private httpCacheService: HttpCacheService;
   private searchBaseUrl: string = 'https://api.fda.gov/drug/drugsfda.json?search=';
   private labelBaseUrl: string = 'https://api.fda.gov/drug/label.json?search=';
 
   constructor(
-    httpCacheService: HTTPCacheService,
+    httpCacheService: HttpCacheService,
   ) {
     this.httpCacheService = httpCacheService;
   }
 
   /**
-   * 
-   * @param applicationID 
-   * @returns 
+   *
+   * @param applicationID
+   * @returns
    */
   public getDrugByApplicationID = async (applicationID: string): Promise<OpenFDADrug> => {
     const results = await this.httpCacheService.get(`https://api.fda.gov/drug/drugsfda.json?search=application_number:${applicationID}&limit=1000`);
@@ -26,9 +26,9 @@ export class OpenFDAService {
   }
 
   /**
-   * 
-   * @param applicationID 
-   * @returns 
+   *
+   * @param applicationID
+   * @returns
    */
   public getLabelsByApplicationID = async (applicationID: string): Promise<any> => {
     const results = await this.httpCacheService.get(`https://api.fda.gov/drug/label.json?search=openfda.application_number:${applicationID}&limit=100`);
