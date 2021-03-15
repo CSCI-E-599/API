@@ -24,7 +24,6 @@ drugsRouter.get('/', async (req: Request, res: Response) => {
   }
 });
 
-
 /**
  * GET drugs/:applicationNumber
  * Route for getting a Drug by FDA Application Number (eg NDA022063, or N022063)

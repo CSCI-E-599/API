@@ -37,8 +37,6 @@ export class DrugsController {
      * @param applicationNumber
      */
     public getDrugByApplicationNumber = async (applicationNumber: string, shouldGetSplHistory: boolean, shouldGetCurrentSplLabel: boolean, shouldGetDrugImages: boolean): Promise<Drug> => {
-      console.log(shouldGetCurrentSplLabel);
-      console.log(shouldGetSplHistory);
       const drug = await this.drugDirector.buildExtensibleDrugWithMetadata(applicationNumber, shouldGetSplHistory, shouldGetCurrentSplLabel, shouldGetDrugImages);
       return drug;
     };

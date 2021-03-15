@@ -1,6 +1,6 @@
 // ./src/services/drugs.service.ts
 import { singleton } from 'tsyringe';
-import { HTTPCacheService } from './httpCache.service';
+import { HTTPCacheService } from './HttpCache.service';
 import { OpenFDADrug } from './OpenFDADrug.interface';
 
 @singleton()
