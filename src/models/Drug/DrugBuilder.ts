@@ -40,7 +40,7 @@ export class DrugBuilder implements DrugBuilderInterface {
     /**
      * setDrugApplicationNumber
      * TODO: Add Comments
-     * @param applicationNumber 
+     * @param applicationNumber
      */
     public setDrugApplicationNumber(applicationNumber: string): void {
       this.drug.setApplicationNumber(applicationNumber);
@@ -116,7 +116,7 @@ export class DrugBuilder implements DrugBuilderInterface {
     /**
      * getDrug
      * TODO: Add Comments
-     * @returns 
+     * @returns
      */
     public getDrug(): Drug {
       const result = this.drug;
