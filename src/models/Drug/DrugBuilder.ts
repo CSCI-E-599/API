@@ -8,47 +8,57 @@ import { DrugSplLabelHistory } from './Drug.model.interfaces';
 
 /**
  * DrugBuilderInterface
- * TODO: Add Comments
+ * This interface specs out the DrugBuilderInterface class and behaves as the
+ * contract between the class in this file and its consumers
  */
 interface DrugBuilderInterface {
   buildDrugMetadata(): void;
 }
 
 /**
- * DrugBuilder singleton class
- * TODO: Add Comments
+ * The DrugBuilder singleton class is responsible for dynamically creating a Drug model. API callers
+ * might require different pieces of drug data depending on their use case. In order to increase
+ * efficicnecy, this class will create the custom Drug model the requester/caller needs on the fly in
+ * an effort to avoid making HTTP or cache requests (through other services) it otherwise wouldn't have
+ * to. However, all Drug models retuned will at least include DrugMetadata.
  */
 @singleton()
 export class DrugBuilder implements DrugBuilderInterface {
   openFDAService = container.resolve(OpenFDAService);
   dailyMedService = container.resolve(DailyMedService);
   RxImageService = container.resolve(RxImageService);
+
+  // the custom ephemeral Drug model currently being built in memory
   drug: Drug = new Drug();
 
   constructor() {
+    // reset the builder to prepare it for the next build
     this.reset();
   }
 
   /**
-   * reset
-   * TODO: Add Comments
+   * Reset the builder by removing the previously built Drug so that it's able to build another Drug
+   * for the next caller
    */
   public reset(): void {
     this.drug = new Drug();
   }
 
   /**
-   * setDrugApplicationNumber
+   * Set the Application Number on the Drug thats currently being built in memory. This param is
+   * necessary to have loaded before any more building is done since the applicationNumber
+   * (aka FDA Application Number) is the identifier we use to fetch drug data from other APIs
    * TODO: Add Comments
-   * @param applicationNumber
+   * @param applicationNumber String: a valid FDA Application Number (eg NDA123123)
    */
   public setDrugApplicationNumber(applicationNumber: string): void {
     this.drug.setApplicationNumber(applicationNumber);
   }
 
   /**
-   * buildDrugMetadata
-   * TODO: Add Comments
+   * Build the Drug model metadata by fetching the drug metadata from the from the FDA API via
+   * the openFDAService then setting the appropriate parameters on the Drug model using the
+   * Drug metadata setter
    */
   public async buildDrugMetadata(): Promise<void> {
     const drugMetadata = await this.openFDAService.getDrugByApplicationID(this.drug.getApplicationNumber());
@@ -56,8 +66,12 @@ export class DrugBuilder implements DrugBuilderInterface {
   }
 
   /**
-   * buildDrugSPLHistory
-   * TODO: Add Comments
+   * Build the Drugs SPL label history by iterating through all the SPL Set IDs in the Drugs
+   * metadata. Each SPL Set ID has its own label history, so for each Set ID a request is made
+   * to the DailyMed API via the dailyMedService in order to fetch that Set IDs SPL history.
+   * For set of SPL Set ID history, push it into an array thats then set as the Drug models
+   * drugSplHistories.
+   * REQUIRES THE DRUG METADATA TO HAVE ALREADY BEEN BUILT
    */
   public async buildDrugSPLHistory() {
     const drugSPLSetIds = this.drug.metadata!.splSetId;
@@ -82,8 +96,13 @@ export class DrugBuilder implements DrugBuilderInterface {
   }
 
   /**
-   * buildDrugImages
-   * TODO: Add Comments
+   * Build the Drugs image links by iterating through all the SPL Set IDs in the Drugs
+   * metadata. Each SPL Set ID could have its own images (and some may have no images),
+   * so for each Set ID a request is made to the rxImages API via the RsImageService in
+   * order to fetch that Set IDs set of image urls. Add all the image URLs to one array.
+   * This is not a essentail feature so the image URLs are not scoped to invidiaul arrays
+   * based on SPL Set ID but can be at a later date with a small refactor.
+   * REQUIRES THE DRUG METADATA TO HAVE ALREADY BEEN BUILT
    */
   public async buildDrugImages() {
     const drugSPLSetIds = this.drug.metadata!.splSetId;
@@ -115,9 +134,11 @@ export class DrugBuilder implements DrugBuilderInterface {
   }
 
   /**
-   * getDrug
-   * TODO: Add Comments
-   * @returns
+   * Get the Drug model thats currently being build in memory. This should be done to fetch the Drug model
+   * after the DrugDirector has completed directing how the Drug model should be built. Once the Drug is
+   * gotten, this.reset is called in order to clear the DrugBuilders current in memory Drug model that way
+   * it's ready to build the next one
+   * @returns Drug: the Drug model currently being built in memory
    */
   public getDrug(): Drug {
     const result = this.drug;

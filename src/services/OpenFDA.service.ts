@@ -1,19 +1,12 @@
 // ./src/services/drugs.service.ts
 import { singleton } from 'tsyringe';
-import { HttpCacheService } from './HttpCache.service';
+import axios from 'axios';
 import { OpenFDADrug } from './OpenFDADrug.interface';
 
 @singleton()
 export class OpenFDAService {
-  private httpCacheService: HttpCacheService;
   private searchBaseUrl: string = 'https://api.fda.gov/drug/drugsfda.json?search=';
   private labelBaseUrl: string = 'https://api.fda.gov/drug/label.json?search=';
-
-  constructor(
-    httpCacheService: HttpCacheService,
-  ) {
-    this.httpCacheService = httpCacheService;
-  }
 
   /**
    *
@@ -21,7 +14,7 @@ export class OpenFDAService {
    * @returns
    */
   public getDrugByApplicationID = async (applicationID: string): Promise<OpenFDADrug> => {
-    const results = await this.httpCacheService.get(`https://api.fda.gov/drug/drugsfda.json?search=application_number:${applicationID}&limit=1000`);
+    const { results } = (await axios.get(`https://api.fda.gov/drug/drugsfda.json?search=application_number:${applicationID}&limit=1000`)).data;
     return results[0];
   }
 
@@ -31,7 +24,7 @@ export class OpenFDAService {
    * @returns
    */
   public getLabelsByApplicationID = async (applicationID: string): Promise<any> => {
-    const results = await this.httpCacheService.get(`https://api.fda.gov/drug/label.json?search=openfda.application_number:${applicationID}&limit=100`);
+    const { results } = (await axios.get(`https://api.fda.gov/drug/label.json?search=openfda.application_number:${applicationID}&limit=100`)).data;
     return results;
   }
 
@@ -112,7 +105,7 @@ export class OpenFDAService {
 
     // try to make search query to the OpenFDA API, if there are no results return an empty array
     try {
-      results = await this.httpCacheService.get(`${this.searchBaseUrl}${p}:${v}&limit=${l.toString()}`);
+      results = (await axios.get(`${this.searchBaseUrl}${p}:${v}&limit=${l.toString()}`)).data.results;
     } catch (err) {
       if (err.response.status === 404) {
         return resultsArray;

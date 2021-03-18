@@ -1,4 +1,6 @@
 /* eslint-disable no-unused-vars */
+import 'reflect-metadata';
+import { container } from 'tsyringe';
 import * as dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
@@ -8,12 +10,23 @@ import { logger } from './utilities/logger.utility';
 /** import routers */
 import { drugsRouter } from './routes/drugs.router';
 
+/** import utilities */
+import { MemcachedMiddleware } from './utilities/memcached.utility';
+
 /** load environment variables */
 dotenv.config();
 
 // if there is no port env var, then exit the server
-if (!process.env.PORT) {
-  process.exit(1);
+if (!process.env.PORT || !process.env.ENABLECACHE || !process.env.CACHEADDRESS) {
+  console.log("Missing requried environment variables")
+;  process.exit(1);
+}
+
+/** initialize memcached in the memcached utility */
+if (process.env.ENABLECACHE === 'true') {
+  console.log('Attempteing to connect to Memcached...');
+  const memcachedMiddleware = container.resolve(MemcachedMiddleware);
+  memcachedMiddleware.initialize('127.0.0.1:11211', 'memcached options');
 }
 
 const PORT: number = parseInt(process.env.PORT as string, 10);
