@@ -5,7 +5,7 @@
 
 export interface DrugMetadata {
     applicationNumber: string;
-    brandName: string;
+    brandNames: string[];
     genericName: string;
     manufacturerName: string;
     productNdc: string[];

@@ -48,7 +48,7 @@ export class Drug implements DrugPlan {
     public setDrugMetadata(metadata: OpenFDADrug): void {
       this.metadata = {
         applicationNumber: metadata.application_number,
-        brandName: metadata.openfda.brand_name[0],
+        brandNames: metadata.openfda.brand_name,
         genericName: metadata.openfda.generic_name[0],
         manufacturerName: metadata.openfda.manufacturer_name[0],
         productNdc: metadata.openfda.product_ndc,
