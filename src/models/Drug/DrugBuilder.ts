@@ -126,13 +126,26 @@ export class DrugBuilder implements DrugBuilderInterface {
 
   /**
    * buildDrugSPLs
-   * TODO: Add Comments
+   * TODO: Add Comments / potentially remove this one
    */
   public async buildDrugSPLs(): Promise<void> {
     const drugSpls = await this.openFDAService.getLabelsByApplicationID(this.drug.getApplicationNumber());
     this.drug.setDrugSPLs(drugSpls);
   }
 
+  // TODO: finish function
+  public async buildDrugLabels(): Promise<void> {
+    // get drug labels from mongo
+    // set the drugs labels param accordingly
+    this.drug.setDrugLabels([]);
+  }
+
+  // TODO: finish function
+  public async buildDrugPatents(): Promise<void> {
+    // get the drug patents from mongo
+    // set the drugs patents param accordingly
+    this.drug.setDrugPatents([]);
+  }
   /**
    * Get the Drug model thats currently being build in memory. This should be done to fetch the Drug model
    * after the DrugDirector has completed directing how the Drug model should be built. Once the Drug is

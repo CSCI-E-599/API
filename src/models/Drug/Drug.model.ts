@@ -1,6 +1,6 @@
 import { OpenFDADrug } from '../../services/OpenFDADrug.interface';
 import { DrugPlan } from './DrugPlan.interface';
-import { DrugMetadata, DrugSplLabelHistory } from './Drug.model.interfaces';
+import { DrugMetadata, DrugSplLabelHistory, DrugLabel, DrugPatent } from './Drug.model.interfaces';
 
 /**
  * Drug Model Drug.model.ts
@@ -15,6 +15,10 @@ export class Drug implements DrugPlan {
     metadata: DrugMetadata | undefined;
     drugSplHistory: DrugSplLabelHistory[] | undefined;
     drugImages: string[] | undefined;
+    drugLabels: DrugLabel[] | undefined;
+    drugPatents: DrugPatent[] | undefined;
+
+    // TODO: remove or rename the SPLs construct
     spls: any;
 
     /**
@@ -92,5 +96,21 @@ export class Drug implements DrugPlan {
      */
     public setDrugSPLs(spls: any): void {
       this.spls = spls;
+    }
+
+    /**
+     * TODO: Add Comment
+     * @param labels
+     */
+    public setDrugLabels(labels: DrugLabel[]): void {
+      this.drugLabels = labels;
+    }
+
+    /**
+     * TODO: Add Comment
+     * @param patents
+     */
+    public setDrugPatents(patents: DrugPatent[]): void {
+      this.drugPatents = patents;
     }
 }

@@ -50,10 +50,26 @@ export class DrugsController {
      * @param shouldGetSplHistory Boolean: Determines whether SPL History metadata will be fetched and added to the resp
      * @param shouldGetCurrentSplLabel Boolean: Determines whether the drugs current SPL Label will be fetched and added to the resp
      * @param shouldGetDrugImages Boolean: Determines whether the drugs image urls will be fetched and added to the resp
+     * @param shouldGetDrugLabels Boolean: Determines whether the drugs labels will be fetched and added to the resp
+     * @param shouldGetDrugPatents Boolean: Determines whether the drugs patents will be fetched and added to the resp
      * @returns Drug: A purpose built Drug model containing Drug metadata and a variety of ther params based on req options
      */
-    public getDrugByApplicationNumber = async (applicationNumber: string, shouldGetSplHistory: boolean, shouldGetCurrentSplLabel: boolean, shouldGetDrugImages: boolean): Promise<Drug> => {
-      const drug = await this.drugDirector.buildExtensibleDrugWithMetadata(applicationNumber, shouldGetSplHistory, shouldGetCurrentSplLabel, shouldGetDrugImages);
+    public getDrugByApplicationNumber = async (
+      applicationNumber: string,
+      shouldGetSplHistory: boolean,
+      shouldGetCurrentSplLabel: boolean,
+      shouldGetDrugImages: boolean,
+      shouldGetDrugLabels: boolean,
+      shouldGetDrugPatents: boolean,
+    ): Promise<Drug> => {
+      const drug = await this.drugDirector.buildExtensibleDrugWithMetadata(
+        applicationNumber,
+        shouldGetSplHistory,
+        shouldGetCurrentSplLabel,
+        shouldGetDrugImages,
+        shouldGetDrugLabels,
+        shouldGetDrugPatents,
+      );
       return drug;
     };
 }

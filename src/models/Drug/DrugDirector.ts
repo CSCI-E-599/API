@@ -25,9 +25,18 @@ export class DrugDirector {
      * @param shouldGetSplHistory Boolean: determines whether the builder will attempt fetch and add the SPL Label history metadata to this Drug
      * @param shouldGetCurrentSplLabel Boolean: determines whether the builder will attempt to fetch and add the current SPL Label to this Drug
      * @param shouldGetDrugImages Booelean: determines whether the builder will attempt to fetch and add drug image urls to this drug
+     * @param shouldGetDrugLabels Boolean: determines whether the builder will attempt to fetch and add drug labels to this drug
+     * @param shouldGetDrugPatents Boolean: determines whether the builder will attempt to fetch and add drug patents to this drug
      * @returns Drug: A built to order ephemeral Drug model to be returned to the API caller, this model is not meant to be persisted anywhere
      */
-    public async buildExtensibleDrugWithMetadata(applicationNumber: string, shouldGetSplHistory: boolean, shouldGetCurrentSplLabel: boolean, shouldGetDrugImages: boolean): Promise<Drug> {
+    public async buildExtensibleDrugWithMetadata(
+      applicationNumber: string,
+      shouldGetSplHistory: boolean,
+      shouldGetCurrentSplLabel: boolean,
+      shouldGetDrugImages: boolean,
+      shouldGetDrugLabels: boolean,
+      shouldGetDrugPatents: boolean,
+    ): Promise<Drug> {
       // set the Drug model application number and get the drugs metadata for every new Drug model
       this.drugBuilder.setDrugApplicationNumber(applicationNumber);
 
@@ -47,6 +56,16 @@ export class DrugDirector {
       // build drug image urls into the new Drug Model if the caller asks for it
       if (shouldGetDrugImages) {
         await this.drugBuilder.buildDrugImages();
+      }
+
+      // build drug patents into the new Drug Model if the caller asks for it
+      if (shouldGetDrugLabels) {
+        await this.drugBuilder.buildDrugLabels();
+      }
+
+      // build drug labels into the new Drug Model if the caller asks for it
+      if (shouldGetDrugPatents) {
+        await this.drugBuilder.buildDrugPatents();
       }
 
       return this.drugBuilder.getDrug();

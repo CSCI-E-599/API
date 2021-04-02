@@ -30,6 +30,14 @@ export interface DrugSplLabelHistory {
     history: DrugSplLabelHistoryEntry[];
 }
 
+export interface DrugLabel {
+    [key: string]: any;
+}
+
+export interface DrugPatent {
+    [key: string]: any;
+}
+
 // export interface Product {
 //     productNumber: string;
 //     referenceDrug: string;
