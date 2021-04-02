@@ -1,4 +1,7 @@
 /* eslint-disable camelcase */
+import { PharmaDBLabelInterface } from "../../services/PharmaDBLabel.interface";
+import { PharmaDBPatentInterface } from "../../services/PharmaDBPatent.interface";
+
 /**
  * Drug.model.interfaces.ts
  */
@@ -30,12 +33,12 @@ export interface DrugSplLabelHistory {
     history: DrugSplLabelHistoryEntry[];
 }
 
-export interface DrugLabel {
-    [key: string]: any;
+export interface DrugLabel extends PharmaDBLabelInterface {
+
 }
 
-export interface DrugPatent {
-    [key: string]: any;
+export interface DrugPatent extends PharmaDBPatentInterface {
+
 }
 
 // export interface Product {

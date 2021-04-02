@@ -3,6 +3,7 @@ import { container, singleton } from 'tsyringe';
 import { OpenFDAService } from '../../services/OpenFDA.service';
 import { DailyMedService, DailyMedSplLabelHistory } from '../../services/DailyMed.service';
 import { RxImageService } from '../../services/RxImage.service';
+import { PharmaDBService } from "../../services/PharmaDB.service";
 import { Drug } from './Drug.model';
 import { DrugSplLabelHistory } from './Drug.model.interfaces';
 
@@ -27,6 +28,7 @@ export class DrugBuilder implements DrugBuilderInterface {
   openFDAService = container.resolve(OpenFDAService);
   dailyMedService = container.resolve(DailyMedService);
   RxImageService = container.resolve(RxImageService);
+  PharmaDBService = container.resolve(PharmaDBService);
 
   // the custom ephemeral Drug model currently being built in memory
   drug: Drug = new Drug();
@@ -135,16 +137,14 @@ export class DrugBuilder implements DrugBuilderInterface {
 
   // TODO: finish function
   public async buildDrugLabels(): Promise<void> {
-    // get drug labels from mongo
-    // set the drugs labels param accordingly
-    this.drug.setDrugLabels([]);
+    const drugLabels = await this.PharmaDBService.getLabelsByNDANumber(this.drug.getApplicationNumber());
+    this.drug.setDrugLabels(drugLabels);
   }
 
   // TODO: finish function
   public async buildDrugPatents(): Promise<void> {
-    // get the drug patents from mongo
-    // set the drugs patents param accordingly
-    this.drug.setDrugPatents([]);
+    const drugPatents = await this.PharmaDBService.getPatentsByNDANumber(this.drug.getApplicationNumber());
+    this.drug.setDrugPatents(drugPatents);
   }
   /**
    * Get the Drug model thats currently being build in memory. This should be done to fetch the Drug model

@@ -1,0 +1,59 @@
+{
+  "data": [
+    {
+      "application_numbers": [
+        "NDA1234"
+      ],
+      "setid": "Setid1234",
+      "spl_id": "Splid1234",
+      "spl_version": "28",
+      "sections": {
+        "name": "INDICATIONS AND USAGE",
+        "text": "lorem ipsum",
+        "scores": [
+          { "patent_number": "patentNumber123", "claim_id": "claimId123", "score": 0.98 },
+          { "patent_number": "patentNumber123", "claim_id": "claimId456", "score": 0.88 },
+          { "patent_number": "patentNumber123", "claim_id": "claimId789", "score": 0.75 }
+        ]
+      },
+       "published_date": "2021-02-04 07:35:25"
+    },
+    {
+      "application_numbers": [
+        "NDA1234"],
+      "setid": "Setid1234",
+      "spl_id": "Splid5678",
+      "spl_version": "29",
+      "sections": {
+        "name": "INDICATIONS AND USAGE",
+        "text": "lorem ipsum",
+        "scores": [
+          { "patent_number": "patentNumber123", "claim_id": "claimId123", "score": 0.98 },
+          { "patent_number": "patentNumber123", "claim_id": "claimId456", "score": 0.88 },
+          { "patent_number": "patentNumber123", "claim_id": "claimId789", "score": 0.75 },
+          { "patent_number": "patentNumber456", "claim_id": "claimId456", "score": 0.88 }
+        ]
+      },
+       "published_date": "2021-02-04 07:35:25"
+    },
+    {
+      "application_numbers": ["NDA1234"],
+      "setid": "Setid1234",
+      "spl_id": "Splid91011",
+      "spl_version": "30",
+      "sections": {
+        "name": "INDICATIONS AND USAGE",
+        "text": "lorem ipsum",
+        "scores": [
+          { "patent_number": "patentNumber123", "claim_id": "claimId123", "score": 0.98 },
+          { "patent_number": "patentNumber123", "claim_id": "claimId456", "score": 0.88 },
+          { "patent_number": "patentNumber123", "claim_id": "claimId789", "score": 0.75 },
+          { "patent_number": "patentNumber456", "claim_id": "claimId456", "score": 0.88 },
+          { "patent_number": "patentNumber456", "claim_id": "claimId789", "score": 0.72 },
+          { "patent_number": "patentNumber789", "claim_id": "claimId789", "score": 0.45 }
+        ]
+      },
+       "published_date": "2021-02-04 07:35:25"
+    }
+  ]
+}
