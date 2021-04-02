@@ -1,0 +1,55 @@
+{
+  "data": [
+    {
+      "patent_number": "patentNumber123",
+      "assignee": [
+        { "org_name": "Assignee One" },
+        { "org_name": "Assignee Two" }
+      ],
+      "inventors": [
+        { "first_name": "Inventor 1 First Name", "last_name": "Inventor 1 Last Name" },
+        { "first_name": "Inventor 2 First Name", "last_name": "Inventor 2 Last Name" }
+      ],
+      "claims": [
+        { "claim_number": "claimId123", "claim_text": "claimId123 text" },
+        { "claim_number": "claimId456", "claim_text": "claimId456 text" },
+        { "claim_number": "claimId789", "claim_text": "claimId789 text" }
+      ],
+      "submission_date": "2021-02-04 07:35:25",
+      "published_date": "2021-02-04 07:35:25"
+    },
+    {
+      "patent_number": "patentNumber456",
+      "assignee": [
+        { "org_name": "Assignee One" },
+        { "org_name": "Assignee Two" },
+        { "org_name": "Assignee Three" }
+      ],
+      "inventors": [
+        { "first_name": "Inventor 1 First Name", "last_name": "Inventor 1 Last Name" }
+      ],
+      "claims": [
+        { "claim_number": "claimId456", "claim_text": "claimId456 text" },
+        { "claim_number": "claimId789", "claim_text": "claimId789 text" }
+      ],
+      "submission_date": "2021-02-04 07:35:25",
+      "published_date": "2021-02-04 07:35:25"
+    },
+    {
+      "patent_number": "patentNumber789",
+      "assignee": [
+        { "org_name": "Assignee One" }
+      ],
+      "inventors": [
+        { "first_name": "Inventor 1 First Name", "last_name": "Inventor 1 Last Name" },
+        { "first_name": "Inventor 2 First Name", "last_name": "Inventor 2 Last Name" },
+        { "first_name": "Inventor 3 First Name", "last_name": "Inventor 3 Last Name" }
+      ],
+      "claims": [
+        { "claim_number": "claimId789", "claim_text": "claimId789 text" }
+      ],
+      "submission_date": "2021-02-04 07:35:25",
+      "published_date": "2021-02-04 07:35:25"
+    }
+  ]
+}

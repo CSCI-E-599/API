@@ -1,4 +1,7 @@
 /* eslint-disable camelcase */
+import { PharmaDBLabelInterface } from "../../services/PharmaDBLabel.interface";
+import { PharmaDBPatentInterface } from "../../services/PharmaDBPatent.interface";
+
 /**
  * Drug.model.interfaces.ts
  */
@@ -28,6 +31,14 @@ export interface DrugSplLabelHistory {
     spl_set_id: string;
     title: string;
     history: DrugSplLabelHistoryEntry[];
+}
+
+export interface DrugLabel extends PharmaDBLabelInterface {
+
+}
+
+export interface DrugPatent extends PharmaDBPatentInterface {
+
 }
 
 // export interface Product {
