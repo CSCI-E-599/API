@@ -6,12 +6,12 @@ export interface PharmaDBLabelInterface {
     sections: {
         name: string;
         text: string;
-        scores: {
+        scores?: {
             patent_number: string;
             claim_id: string;
             score: number;
         }[];
-    }
+    }[];
     published_date: string;
 }
 
