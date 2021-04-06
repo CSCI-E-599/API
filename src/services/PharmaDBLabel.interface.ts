@@ -1,14 +1,15 @@
 export interface PharmaDBLabelInterface {
     application_numbers: string[];
-    setid: string;
+    set_id: string;
     spl_id: string;
     spl_version: string;
     sections: {
         name: string;
         text: string;
         scores?: {
-            patent_number: string;
-            claim_id: string;
+            patentNumber: string;
+            claimNumber: number;
+            parentClaimNumbers: number[];
             score: number;
         }[];
     }[];
