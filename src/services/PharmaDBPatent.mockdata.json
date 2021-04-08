@@ -2,8 +2,8 @@
   "data": [
     {
       "patent_number": "5202128",
-      "expiration_date": "2010-04-13",
-      "published_date": "2000-04-13",
+      "expiration_date": "2016-04-13",
+      "published_date": "2016-04-13",
       "application_numbers": [
         "NDA022321",
         "NDA020616"
@@ -143,8 +143,8 @@
     },
     {
       "patent_number": "5378474",
-      "expiration_date": "2010-03-23",
-      "published_date": "2000-03-23",
+      "expiration_date": "2016-03-23",
+      "published_date": "2016-03-23",
       "application_numbers": [
         "NDA022321",
         "NDA020616"
@@ -259,8 +259,8 @@
     },
     {
       "patent_number": "5807572",
-      "expiration_date": "2015-09-15",
-      "published_date": "2005-09-15",
+      "expiration_date": "2020-09-15",
+      "published_date": "2020-09-15",
       "application_numbers": [
         "NDA021671"
       ],
@@ -469,8 +469,8 @@
     },
     {
       "patent_number": "6241999",
-      "expiration_date": "2016-09-01",
-      "published_date": "2006-09-01",
+      "expiration_date": "2018-09-01",
+      "published_date": "2018-01",
       "application_numbers": [
         "NDA021671"
       ],
