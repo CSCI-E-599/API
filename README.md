@@ -40,8 +40,11 @@ You should then see the following text returned, which will tell you what port t
 
 #### Testing and Validating Functionality
 
-To test the API, you can call the API endpoints in the next section using CURL or Postman.
+To test the API, you can call the API endpoints in the next section using CURL or Postman. Listed below are the example endpoints targeted to a local  API instance...
 
+> localhost:3000/drugs?searchQuery=lipitor&searchType=brand_name
+
+> localhost:3000/drugs/NDA020702?splHistory=false&images=false&currentSplLabel=false
 
 ## API Endpoints
 
