@@ -7,9 +7,9 @@ The PharmaDB Web Application API is responsible for all the interfacing between 
 
 ### Requirements
 - Internet connection for access to other APIs from the FDA, DailyMed and others
-- NodeJS runtime (add installing nodeJS link)
-- NPM package manager (add install NPM link)
-- GIT
+- [NodeJS Runtime](https://nodejs.org/en/download/)
+- [NPM package manager](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+- [GIT](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
 ### Starting the API
 #### 1. Pull the repository
@@ -18,9 +18,11 @@ The PharmaDB API repository can be pulled using the below command.
 ```git clone https://github.com/pharmaDB/pharmadb_api```
 
 #### 2. Run NPM install
-Install all the required NPM packages using the below command.
+Install all the required NPM packages using the below commands, first you must CD into the project directory.
 
-```npm run install```
+```cd pharmadb_api```
+
+```npm install```
 #### 3. Start the Webpack build server
 In order to transpile typescript to javascript, you must run the below command and keep it running while running the API in another terminal window.
 
