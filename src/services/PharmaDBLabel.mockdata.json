@@ -3641,8 +3641,8 @@
       "previous_label_spl_id": "c6b5b158-a814-411c-90f2-7a84d8814145",
       "previous_label_spl_version": "10",
       "next_label_published_date": null,
-      "next_label_spl_id": 0,
-      "next_label_spl_version": -1,
+      "next_label_spl_id": null,
+      "next_label_spl_version": null,
       "diff_against_previous_label": [
         {
           "name": "1 INDICATIONS AND USAGE",
@@ -6932,8 +6932,8 @@
         }
       ],
       "previous_label_published_date": null,
-      "previous_label_spl_id": 0,
-      "previous_label_spl_version": -1,
+      "previous_label_spl_id": null,
+      "previous_label_spl_version": null,
       "next_label_published_date": "2016-12-08",
       "next_label_spl_id": "eba483a8-ccb1-4147-bea8-bc7a9bc6110a",
       "next_label_spl_version": "6",
@@ -8549,8 +8549,8 @@
       "previous_label_spl_id": "a1e0af89-c891-4ccd-b61a-48bce3938a09",
       "previous_label_spl_version": "5",
       "next_label_published_date": null,
-      "next_label_spl_id": 0,
-      "next_label_spl_version": -1,
+      "next_label_spl_id": null,
+      "next_label_spl_version": null,
       "diff_against_previous_label": [
         {
           "name": "1 INDICATIONS AND USAGE",
@@ -15137,8 +15137,8 @@
         }
       ],
       "previous_label_published_date": null,
-      "previous_label_spl_id": 0,
-      "previous_label_spl_version": -1,
+      "previous_label_spl_id": null,
+      "previous_label_spl_version": null,
       "next_label_published_date": "2015-12-22",
       "next_label_spl_id": "374be517-c8bd-4ecf-b9c4-bac8ed7ab2ba",
       "next_label_spl_version": "7",

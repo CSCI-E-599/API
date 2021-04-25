@@ -10,18 +10,18 @@ export interface PharmaDBLabelInterface {
     'sections': {
         'name': string,
         'text': string,
-        'parent': string
+        'parent': string | null
     }[],
-    'previous_label_published_date': string,
-    'previous_label_spl_id': string,
-    'previous_label_spl_version': string,
-    'next_label_published_date': string,
-    'next_label_spl_id': string,
-    'next_label_spl_version': string,
+    'previous_label_published_date': string | null,
+    'previous_label_spl_id': string | null,
+    'previous_label_spl_version': string | null,
+    'next_label_published_date': string | null,
+    'next_label_spl_id': string | null,
+    'next_label_spl_version': string | null,
     'diff_against_previous_label': {
         'name': string,
         'text': any[][],
-        'parent': string,
+        'parent': string | null,
         'additions':
             {
                 'indices': number[],
