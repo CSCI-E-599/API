@@ -18,8 +18,8 @@ dotenv.config();
 
 // if there is no port env var, then exit the server
 if (!process.env.PORT || !process.env.ENABLECACHE || !process.env.CACHEADDRESS) {
-  console.log("Missing requried environment variables")
-;  process.exit(1);
+  console.log('Missing required environment variables');
+  process.exit(1);
 }
 
 /** initialize memcached in the memcached utility */
