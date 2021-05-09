@@ -1,10 +1,6 @@
-/* eslint-disable camelcase */
-import { PharmaDBLabelInterface } from "../../services/PharmaDBLabel.interface";
-import { PharmaDBPatentInterface } from "../../services/PharmaDBPatent.interface";
-
-/**
- * Drug.model.interfaces.ts
- */
+// ./src/models/Drug.model.interface.ts
+import { PharmaDBLabelInterface } from '../../services/PharmaDBLabel.interface';
+import { PharmaDBPatentInterface } from '../../services/PharmaDBPatent.interface';
 
 export interface DrugMetadata {
     applicationNumber: string;

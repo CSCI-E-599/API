@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 // ./src/routes/drugs.router.ts
 import 'reflect-metadata';
 import express, { Request, Response } from 'express';
@@ -10,6 +9,11 @@ export const drugsRouter = express.Router();
 const drugsController = container.resolve(DrugsController);
 const memcachedMiddleware = container.resolve(MemcachedMiddleware);
 
+/**
+ * GET /drugs
+ * Route for searching for a Drug. Provided by a GET all route (that wont actually GET all). Query parameters must be
+ * included in order to conduct the search. These query parameters are 'searchQuery' and 'searchType'
+ */
 drugsRouter.get('/', memcachedMiddleware.useCacheWithDurationOf(2000), async (req: Request, res: Response) => {
   const { searchQuery } = req.query;
   const { searchType } = req.query;

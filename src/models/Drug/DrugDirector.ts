@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+// ./src/models/DrugDirector.ts
 import { singleton } from 'tsyringe';
 import { DrugBuilder } from './DrugBuilder';
 import { Drug } from './Drug.model';

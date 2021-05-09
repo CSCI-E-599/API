@@ -1,9 +1,10 @@
-/* eslint-disable max-len */
+// ./src/models/DrugBuilder.ts
 import { container, singleton } from 'tsyringe';
 import { OpenFDAService } from '../../services/OpenFDA.service';
-import { DailyMedService, DailyMedSplLabelHistory } from '../../services/DailyMed.service';
+import { DailyMedSplLabelHistory } from '../../services/DailyMed.interface';
+import { DailyMedService } from '../../services/DailyMed.service';
 import { RxImageService } from '../../services/RxImage.service';
-import { PharmaDBService } from "../../services/PharmaDB.service";
+import { PharmaDBService } from '../../services/PharmaDB.service';
 import { Drug } from './Drug.model';
 import { DrugSplLabelHistory } from './Drug.model.interfaces';
 
@@ -127,21 +128,27 @@ export class DrugBuilder implements DrugBuilderInterface {
   }
 
   /**
-   * buildDrugSPLs
-   * TODO: Add Comments / potentially remove this one
+   * Build the Drug label historical metadata on the Drug model by getting the data from the DailyMed service and
+   * setting them onto the Drug model under construction
    */
   public async buildDrugSPLs(): Promise<void> {
     const drugSpls = await this.openFDAService.getLabelsByApplicationID(this.drug.getApplicationNumber());
     this.drug.setDrugSPLs(drugSpls);
   }
 
-  // TODO: finish function
+  /**
+   * Build the Drug Labels on the Drug model by getting the labels from the PharmaDB service and setting them
+   * onto the Drug model under construction
+   */
   public async buildDrugLabels(): Promise<void> {
     const drugLabels = await this.PharmaDBService.getLabelsByNDANumber(this.drug.getApplicationNumber());
     this.drug.setDrugLabels(drugLabels);
   }
 
-  // TODO: finish function
+  /**
+   * Build the Drug Patents on the Drug model by getting the patents from the PharmaDB service and setting them
+   * onto the Drug model under construction
+   */
   public async buildDrugPatents(): Promise<void> {
     const drugPatents = await this.PharmaDBService.getPatentsByNDANumber(this.drug.getApplicationNumber());
     this.drug.setDrugPatents(drugPatents);

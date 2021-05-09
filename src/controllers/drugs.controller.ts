@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import 'reflect-metadata';
 import { singleton } from 'tsyringe';
 import { Drug } from '../models/Drug/Drug.model';
@@ -8,8 +7,8 @@ import { OpenFDADrug } from '../services/OpenFDADrug.interface';
 
 /**
  * Drugs Controller drugs.controller.ts
- * This controller class is reponsible for organizing all the requests that come from routes
- * beginning with /drugs. This primarily inlcudes the drugs search path and the get drug by
+ * This controller class is responsible for organizing all the requests that come from routes
+ * beginning with /drugs. This primarily includes the drugs search path and the get drug by
  * FDA Application number path.
  */
 

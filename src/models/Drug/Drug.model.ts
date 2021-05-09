@@ -1,6 +1,9 @@
+// ./src/models/Drug.model.ts
 import { OpenFDADrug } from '../../services/OpenFDADrug.interface';
 import { DrugPlan } from './DrugPlan.interface';
-import { DrugMetadata, DrugSplLabelHistory, DrugLabel, DrugPatent } from './Drug.model.interfaces';
+import {
+  DrugMetadata, DrugSplLabelHistory, DrugLabel, DrugPatent,
+} from './Drug.model.interfaces';
 
 /**
  * Drug Model Drug.model.ts
@@ -17,8 +20,6 @@ export class Drug implements DrugPlan {
     drugImages: string[] | undefined;
     drugLabels: DrugLabel[] | undefined;
     drugPatents: DrugPatent[] | undefined;
-
-    // TODO: remove or rename the SPLs construct
     spls: any;
 
     /**
@@ -99,16 +100,16 @@ export class Drug implements DrugPlan {
     }
 
     /**
-     * TODO: Add Comment
-     * @param labels
+     * set the Drug labels on the Drug model
+     * @param labels DrugLabel[]: a collection of DrugLabels to be placed on the Drug model
      */
     public setDrugLabels(labels: DrugLabel[]): void {
       this.drugLabels = labels;
     }
 
     /**
-     * TODO: Add Comment
-     * @param patents
+     * set the Drug patents on the Drug model
+     * @param patents DrugPatent[]: a collection of DrugPatents to be placed on the Drug model
      */
     public setDrugPatents(patents: DrugPatent[]): void {
       this.drugPatents = patents;

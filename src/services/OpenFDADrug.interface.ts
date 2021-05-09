@@ -1,4 +1,4 @@
-/* eslint-disable camelcase */
+// ./src/services/OpenFDADrug.interface.ts
 export interface OpenFDADrug {
     submissions?: any[];
     application_number: string;

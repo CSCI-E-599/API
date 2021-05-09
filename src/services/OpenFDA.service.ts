@@ -1,4 +1,4 @@
-// ./src/services/drugs.service.ts
+// ./src/services/OpenFDA.service.ts
 import { singleton } from 'tsyringe';
 import axios from 'axios';
 import { OpenFDADrug } from './OpenFDADrug.interface';
@@ -9,9 +9,9 @@ export class OpenFDAService {
   private labelBaseUrl: string = 'https://api.fda.gov/drug/label.json?search=';
 
   /**
-   *
-   * @param applicationID
-   * @returns
+   * Get a drug from the FDA API by its NDA Number
+   * @param applicationID string: a valid FDA NDA number associated with a Drug
+   * @returns OpenFDADrug: the metadata for the drug whose FDA NDA number matched the one provided
    */
   public getDrugByApplicationID = async (applicationID: string): Promise<OpenFDADrug> => {
     const { results } = (await axios.get(`https://api.fda.gov/drug/drugsfda.json?search=application_number:${applicationID}&limit=1000`)).data;
@@ -19,9 +19,9 @@ export class OpenFDAService {
   }
 
   /**
-   *
-   * @param applicationID
-   * @returns
+   * Get a drugs labels from the FDA by the drugs NDA Number
+   * @param applicationID string: a valid FDA NDA number associated with a Drug
+   * @returns any: the label for the drug whose FDA NDA number matched the one provided
    */
   public getLabelsByApplicationID = async (applicationID: string): Promise<any> => {
     const { results } = (await axios.get(`https://api.fda.gov/drug/label.json?search=openfda.application_number:${applicationID}&limit=100`)).data;

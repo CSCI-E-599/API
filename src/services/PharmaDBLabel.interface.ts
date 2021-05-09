@@ -1,3 +1,4 @@
+// ./src/services/PharmaDBLabel.interface.ts
 export interface PharmaDBLabelInterfaceAddition {
     indices?: number[],
     'expanded_context': string,

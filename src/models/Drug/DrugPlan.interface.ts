@@ -1,6 +1,7 @@
+// ./src/models/DrugPlan.interface.ts
 /* eslint-disable no-unused-vars */
 import { OpenFDADrug } from '../../services/OpenFDADrug.interface';
-import {DrugLabel, DrugPatent, DrugSplLabelHistory} from './Drug.model.interfaces';
+import { DrugLabel, DrugPatent, DrugSplLabelHistory } from './Drug.model.interfaces';
 
 export interface DrugPlan {
     setApplicationNumber(applicationNumber: string): void;
