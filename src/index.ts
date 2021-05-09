@@ -6,6 +6,8 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import { logger } from './utilities/logger.utility';
+import mongoose from 'mongoose';
+import mongo from 'mongodb';
 
 /** import routers */
 import { drugsRouter } from './routes/drugs.router';
@@ -21,6 +23,12 @@ if (!process.env.PORT || !process.env.ENABLECACHE || !process.env.CACHEADDRESS) 
   console.log('Missing required environment variables');
   process.exit(1);
 }
+
+
+
+// mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}`)
+//   .then(() => { console.log('Successfully connected to mongoDB'); })
+//   .catch((err) => console.error(err));
 
 /** initialize memcached in the memcached utility */
 if (process.env.ENABLECACHE === 'true') {

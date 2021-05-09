@@ -1,5 +1,5 @@
 export interface PharmaDBLabelInterfaceAddition {
-    'indices': number[],
+    indices?: number[],
     'expanded_context': string,
     'scores':
         {
@@ -35,5 +35,6 @@ export interface PharmaDBLabelInterface {
         'text': any[][],
         'parent': string | null,
         additions?: PharmaDBLabelInterfaceAddition[] | undefined
-    }[]
+    }[],
+    additions?: any
 }
