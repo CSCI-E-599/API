@@ -1,19 +1,13 @@
 /* eslint-disable no-unused-vars */
 import 'reflect-metadata';
-import { container } from 'tsyringe';
 import * as dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import { logger } from './utilities/logger.utility';
-import mongoose from 'mongoose';
-import mongo from 'mongodb';
 
 /** import routers */
 import { drugsRouter } from './routes/drugs.router';
-
-/** import utilities */
-import { MemcachedMiddleware } from './utilities/memcached.utility';
 
 /** load environment variables */
 dotenv.config();
@@ -22,19 +16,6 @@ dotenv.config();
 if (!process.env.PORT || !process.env.ENABLECACHE || !process.env.CACHEADDRESS) {
   console.log('Missing required environment variables');
   process.exit(1);
-}
-
-
-
-// mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}`)
-//   .then(() => { console.log('Successfully connected to mongoDB'); })
-//   .catch((err) => console.error(err));
-
-/** initialize memcached in the memcached utility */
-if (process.env.ENABLECACHE === 'true') {
-  console.log('Attempteing to connect to Memcached...');
-  const memcachedMiddleware = container.resolve(MemcachedMiddleware);
-  memcachedMiddleware.initialize('127.0.0.1:11211', 'memcached options');
 }
 
 const PORT: number = parseInt(process.env.PORT as string, 10);
