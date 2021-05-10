@@ -11,7 +11,7 @@ export class MongoService {
     private patentCollection: mongo.Collection | undefined;
     private labelCollection: mongo.Collection | undefined;
 
-    uri = 'mongodb+srv://prod:kf8x7eplkDA1ZRbj@cluster0.arbyh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+    uri = 'mongodb://ec2-35-170-81-159.compute-1.amazonaws.com:27017';
 
     init = async (): Promise<mongo.MongoClient> => {
       this.client = new mongo.MongoClient(this.uri, {
@@ -20,8 +20,8 @@ export class MongoService {
       });
 
       await this.client.connect();
-      this.labelCollection = this.client.db('new_bert').collection('labels');
-      this.patentCollection = this.client.db('new_bert').collection('patents');
+      this.labelCollection = this.client.db('pharmadb').collection('labels');
+      this.patentCollection = this.client.db('pharmadb').collection('patents');
       return this.client;
     }
 
@@ -53,7 +53,7 @@ export class MongoService {
     findLabelsByNDANumber = async (nda: string): Promise<PharmaDBLabelInterface[]> => {
       const labelResults: PharmaDBLabelInterface[] = [];
       const labelCollection = await this.getOrInitLabelCollection();
-      const results = await labelCollection.find({ application_numbers: nda });
+      const results = await labelCollection.find({ application_numbers: parseInt(nda.substring(3, 9), 10).toString() });
       if (!results) { return labelResults; }
 
       _.forEach(await results.toArray(), (label: PharmaDBLabelInterface) => {
