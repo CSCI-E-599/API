@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "fab9336c-e213-407d-8b1d-9d632af94c65",
+		"name": "PharmaDB API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Drug by NDA",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Request should be successful\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Your test name\", function () {",
+							"        var jsonData = pm.response.json();",
+							"        pm.expect(jsonData.applicationNumber).to.equal(\"NDA020702\");",
+							"        pm.expect(jsonData.metadata).to.equal(\"metadata\": {",
+							"        \"applicationNumber\": \"NDA020702\",",
+							"        \"brandNames\": [",
+							"            \"LIPITOR\",",
+							"            \"ATORVASTATIN CALCIUM\"",
+							"        ],",
+							"        \"genericName\": \"ATORVASTATIN CALCIUM\",",
+							"        \"manufacturerName\": \"Parke-Davis Div of Pfizer Inc\",",
+							"        \"productNdc\": [",
+							"            \"0071-0155\",",
+							"            \"0071-0156\",",
+							"            \"0071-0157\",",
+							"            \"0071-0158\",",
+							"            \"59762-0155\",",
+							"            \"59762-0156\",",
+							"            \"59762-0157\",",
+							"            \"59762-0158\"",
+							"        ],",
+							"        \"productType\": \"HUMAN PRESCRIPTION DRUG\",",
+							"        \"substanceName\": [",
+							"            \"ATORVASTATIN CALCIUM TRIHYDRATE\"",
+							"        ],",
+							"        \"splId\": \"0ba214c6-250e-42a0-aea8-5e44aba04882\",",
+							"        \"splSetId\": [",
+							"            \"c6e131fe-e7df-4876-83f7-9156fc4e8228\",",
+							"            \"59b924d0-e27f-4567-a0c4-467f9a61df3e\"",
+							"        ],",
+							"        \"packageNdc\": [",
+							"            \"0071-0155-23\",",
+							"            \"0071-0155-40\",",
+							"            \"0071-0155-10\",",
+							"            \"0071-0155-97\",",
+							"            \"0071-0156-23\",",
+							"            \"0071-0156-40\",",
+							"            \"0071-0156-10\",",
+							"            \"0071-0156-96\",",
+							"            \"0071-0157-23\",",
+							"            \"0071-0157-73\",",
+							"            \"0071-0157-40\",",
+							"            \"0071-0157-97\",",
+							"            \"0071-0158-23\",",
+							"            \"0071-0158-73\",",
+							"            \"0071-0158-92\",",
+							"            \"59762-0155-1\",",
+							"            \"59762-0155-2\",",
+							"            \"59762-0156-1\",",
+							"            \"59762-0156-2\",",
+							"            \"59762-0157-1\",",
+							"            \"59762-0157-2\",",
+							"            \"59762-0158-1\",",
+							"            \"59762-0158-2\"",
+							"        ]",
+							"    });",
+							"    });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/drugs/NDA020702?splHistory=false&images=true&currentSplLabel=false&labels=true&patents=true",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"drugs",
+						"NDA020702"
+					],
+					"query": [
+						{
+							"key": "splHistory",
+							"value": "false"
+						},
+						{
+							"key": "images",
+							"value": "true"
+						},
+						{
+							"key": "currentSplLabel",
+							"value": "false"
+						},
+						{
+							"key": "labels",
+							"value": "true"
+						},
+						{
+							"key": "patents",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Drug by Brand Name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.pharmadb.org/drugs?searchQuery=adderall&searchType=brand_name",
+					"protocol": "https",
+					"host": [
+						"api",
+						"pharmadb",
+						"org"
+					],
+					"path": [
+						"drugs"
+					],
+					"query": [
+						{
+							"key": "searchQuery",
+							"value": "adderall"
+						},
+						{
+							"key": "searchType",
+							"value": "brand_name"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Drug by NDA Number",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.pharmadb.org/drugs?searchQuery=NDA020702&searchType=application_number",
+					"protocol": "https",
+					"host": [
+						"api",
+						"pharmadb",
+						"org"
+					],
+					"path": [
+						"drugs"
+					],
+					"query": [
+						{
+							"key": "searchQuery",
+							"value": "NDA020702"
+						},
+						{
+							"key": "searchType",
+							"value": "application_number"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Drug by Manufacturer Name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.pharmadb.org/drugs?searchQuery=pfizer&searchType=manufacturer_name",
+					"protocol": "https",
+					"host": [
+						"api",
+						"pharmadb",
+						"org"
+					],
+					"path": [
+						"drugs"
+					],
+					"query": [
+						{
+							"key": "searchQuery",
+							"value": "pfizer"
+						},
+						{
+							"key": "searchType",
+							"value": "manufacturer_name"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Drug by Active Ingredients",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		}
+	]
+}
