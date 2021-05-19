@@ -11,10 +11,8 @@ export class MongoService {
     private patentCollection: mongo.Collection | undefined;
     private labelCollection: mongo.Collection | undefined;
 
-    uri = 'mongodb://ec2-35-170-81-159.compute-1.amazonaws.com:27017';
-
     init = async (): Promise<mongo.MongoClient> => {
-      this.client = new mongo.MongoClient(this.uri, {
+      this.client = new mongo.MongoClient(process.env.MONGOADDRESS, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       });

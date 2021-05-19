@@ -23,12 +23,18 @@ Install all the required NPM packages using the below commands, first you must C
 ```cd pharmadb_api```
 
 ```npm install```
-#### 3. Start the Webpack build server
+
+#### 3. Add you MongoDB Connection string
+The API requires a MongoDB data source for the patents, labels and label scores. This is provided by the [PharmaDB ETL pipeline](https://github.com/pharmaDB/etl_pipeline)
+which when run will populate a MongoDB database which then will provide the data this API requires. To configure this, simply
+replace the MONGOADDRESS param in `.env` with the connection string of your MongoDB database that was populated with your running instance of the [ETL pipeline](https://github.com/pharmaDB/etl_pipeline).
+
+#### 4. Start the Webpack build server
 In order to transpile typescript to javascript, you must run the below command and keep it running while running the API in another terminal window.
 
 ```npm run webpack```
 
-#### 4. Start the API server
+#### 5. Start the API server
 
 To start the web server, run the below command...
 
