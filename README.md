@@ -24,7 +24,7 @@ Install all the required NPM packages using the below commands, first you must C
 
 ```npm install```
 
-#### 3. Add you MongoDB Connection string
+#### 3. Add your MongoDB Connection string
 The API requires a MongoDB data source for the patents, labels and label scores. This is provided by the [PharmaDB ETL pipeline](https://github.com/pharmaDB/etl_pipeline)
 which when run will populate a MongoDB database which then will provide the data this API requires. To configure this, simply
 replace the MONGOADDRESS param in `.env` with the connection string of your MongoDB database that was populated with your running instance of the [ETL pipeline](https://github.com/pharmaDB/etl_pipeline).
